@@ -1,11 +1,3 @@
-// @ts-check
-//
-// ☝🏽 The line above enables type checking for this file. Various IDEs interpret
-// the @ts-check directive. It will give you helpful autocompletion on the web
-// and supported IDEs when implementing this exercise. You don't need to
-// understand types, JSDoc, or TypeScript in order to complete this JavaScript
-// exercise, and can completely ignore this comment block and directive.
-
 // 👋🏽 Hi there!
 //
 // On the JavaScript track we provide you with stubs. These stubs provide a
@@ -35,6 +27,11 @@
  */
 const TOTAL_COOKING_TIME = 40;
 const PREPARATION_MINUTES_PER_LAYER = 2;
+
+/**
+ * The expected number of minutes the lasagna should be in the oven.
+ */
+export const EXPECTED_MINUTES_IN_OVEN = 40;
 
 /**
  * Determines the number of minutes the lasagna still needs to remain in the
