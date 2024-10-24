@@ -1,5 +1,3 @@
-// @ts-check
-//
 // ☝🏽 The line above enables type checking for this file. Various IDEs interpret
 // the @ts-check directive. It will give you helpful autocompletion on the web
 // and supported IDEs when implementing this exercise. You don't need to
@@ -26,7 +24,7 @@
  * @returns {number} the rate per day
  */
 export function dayRate(ratePerHour) {
-  throw new Error('Remove this line and implement the function');
+  return ratePerHour * 8;
 }
 
 /**
@@ -37,7 +35,7 @@ export function dayRate(ratePerHour) {
  * @returns {number} the number of days
  */
 export function daysInBudget(budget, ratePerHour) {
-  throw new Error('Remove this line and implement the function');
+  return Math.floor(budget / (ratePerHour * 8));
 }
 
 /**
@@ -49,5 +47,16 @@ export function daysInBudget(budget, ratePerHour) {
  * @returns {number} the rounded up discounted rate
  */
 export function priceWithMonthlyDiscount(ratePerHour, numDays, discount) {
-  throw new Error('Remove this line and implement the function');
+  const hoursPerDay = 8;
+  const daysPerMonth = 22;
+  
+  const fullMonths = Math.floor(numDays / daysPerMonth);
+  const remainingDays = numDays % daysPerMonth;
+  
+  const monthlyRate = ratePerHour * hoursPerDay * daysPerMonth;
+  const discountedMonthlyRate = monthlyRate * (1 - discount);
+  
+  const totalCost = (fullMonths * discountedMonthlyRate) + (remainingDays * ratePerHour * hoursPerDay);
+  
+  return Math.ceil(totalCost);
 }
