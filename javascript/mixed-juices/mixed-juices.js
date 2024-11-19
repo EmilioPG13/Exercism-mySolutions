@@ -1,9 +1,3 @@
-// @ts-check
-//
-// The line above enables type checking for this file. Various IDEs interpret
-// the @ts-check directive. It will give you helpful autocompletion when
-// implementing this exercise.
-
 /**
  * Determines how long it takes to prepare a certain juice.
  *
@@ -11,7 +5,19 @@
  * @returns {number} time in minutes
  */
 export function timeToMixJuice(name) {
-  throw new Error('Please implement the timeToMixJuice function');
+  switch (name) {
+    case 'Pure Strawberry Joy':
+      return 0.5;
+    case 'Energizer':
+    case 'Green Garden':
+      return 1.5;
+    case 'Tropical Island':
+      return 3;
+    case 'All or Nothing':
+      return 5;
+    default:
+      return 2.5;
+  }
 }
 
 /**
@@ -23,9 +29,31 @@ export function timeToMixJuice(name) {
  * @returns {number} number of limes cut
  */
 export function limesToCut(wedgesNeeded, limes) {
-  throw new Error('Please implement the limesToCut function');
-}
+  let wedgesCount = 0;
+  let limesCount = 0;
 
+  for (let i = 0; i < limes.length; i++) {
+    if (wedgesCount >= wedgesNeeded) {
+      break;
+    }
+
+    switch (limes[i]) {
+      case 'small':
+        wedgesCount += 6;
+        break;
+      case 'medium':
+        wedgesCount += 8;
+        break;
+      case 'large':
+        wedgesCount += 10;
+        break;
+    }
+
+    limesCount++;
+  }
+
+  return limesCount;
+}
 /**
  * Determines which juices still need to be prepared after the end of the shift.
  *
@@ -34,5 +62,9 @@ export function limesToCut(wedgesNeeded, limes) {
  * @returns {string[]} remaining orders after the time is up
  */
 export function remainingOrders(timeLeft, orders) {
-  throw new Error('Please implement the remainingOrders function');
+  while (timeLeft > 0) {
+    timeLeft = timeLeft - timeToMixJuice(orders[0]);
+    orders.shift();
+  }
+  return orders;
 }
