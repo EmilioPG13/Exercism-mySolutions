@@ -1,67 +1,73 @@
-/// <reference path="./global.d.ts" />
 // @ts-check
+//
+// The line above enables type checking for this file. Various IDEs interpret
+// the @ts-check directive. It will give you helpful autocompletion when
+// implementing this exercise.
 
 /**
- * Get the first card in the given deck
+ * Get the position (index) of the card in the given stack
  *
- * @param {Card[]} deck
+ * @param {number[]} stack
+ * @param {number} card
  *
- * @returns {Card} the first card in the deck
+ * @returns {number} position of the card in the stack
  */
-export function getFirstCard(deck) {
-  const [firstCard] = deck;
-  return firstCard;
+export function getCardPosition(stack, card) {
+  return stack.indexOf(card);
 }
 
 /**
- * Get the second card in the given deck
+ * Determine if the stack contains the card
  *
- * @param {Card[]} deck
+ * @param {number[]} stack
+ * @param {number} card
  *
- * @returns {Card} the second card in the deck
+ * @returns {boolean} true if card is in the stack, false otherwise
  */
-export function getSecondCard(deck) {
-  const [, secondCard] = deck;
-  return secondCard;
+export function doesStackIncludeCard(stack, card) {
+  return stack.includes(card);
 }
 
 /**
- * Switch the position of the first two cards in the given deck
+ * Determine if each card is even
  *
- * @param {Card[]} deck
+ * @param {number[]} stack
  *
- * @returns {Card[]} new deck with reordered cards
+ * @returns {boolean} true if all cards are even, false otherwise
  */
-export function swapTopTwoCards(deck) {
-  const [firstCard, secondCard, ...rest] = deck;
-  return [secondCard, firstCard, ...rest];
+export function isEachCardEven(stack) {
+  return stack.every((num) => num % 2 === 0);
 }
 
 /**
- * Put the top card of the given deck into a separate discard pile
+ * Check if stack contains odd-value card
  *
- * @param {Card[]} deck
+ * @param {number[]} stack
  *
- * @returns {[Card, Card[]]} the top card of the given
- * deck and a new deck containing all the other cards
+ * @returns {boolean} true if the array contains odd card, false otherwise
  */
-export function discardTopCard(deck) {
-  const [firstCard, ...restOfDeck] = deck;
-  return [firstCard, restOfDeck];
+export function doesStackIncludeOddCard(stack) {
+  return stack.some((num) => num % 2 !== 0);
 }
 
-/** @type {Card[]} **/
-const FACE_CARDS = ['jack', 'queen', 'king'];
+/**
+ * Get the first odd card from the stack
+ *
+ * @param {number[]} stack
+ *
+ * @returns {number | undefined} the first odd value
+ */
+export function getFirstOddCard(stack) {
+  return stack.find((num) => num % 2 !== 0);
+}
 
 /**
- * Insert face cards into the given deck
+ * Determine the position of the first card that is even
  *
- * @param {Card[]} deck
+ * @param {number[]} stack
  *
- * @returns {Card[]} new deck where the second,
- * third, and fourth cards are the face cards
+ * @returns {number} position of the first card that is even
  */
-export function insertFaceCards(deck) {
-  const [firstCard, ...restOfDeck] = deck;
-  return [firstCard, 'jack', 'queen', 'king', ...restOfDeck];
+export function getFirstEvenCardPosition(stack) {
+  return stack.findIndex((num) => num % 2 === 0);
 }
