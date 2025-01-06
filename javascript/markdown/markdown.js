@@ -58,36 +58,39 @@ function parseUnorderedList(lines) {
 
 // Function to parse the entire Markdown input
 export function parse(markdown) {
-  const lines = markdown.split('\n');
-  let inList = false;
-  let listLines = [];
-  const parsedLines = lines.map(line => {
+  const lines = markdown.split('\n'); // Split Markdown by lines
+  let inList = false; // Track whether we are inside a list
+  let listLines = []; // Store lines that are part of a list
+  let result = ''; // Store the resulting HTML
+
+  lines.forEach((line, index) => {
     if (line.startsWith('#')) {
+      // Handle headers
       if (inList) {
-        inList = false;
-        const listHtml = parseUnorderedList(listLines);
+        result += parseUnorderedList(listLines);
         listLines = [];
-        return listHtml + '\n' + parseHeader(line);
+        inList = false;
       }
-      return parseHeader(line);
+      result += parseHeader(line);
     } else if (line.startsWith('* ')) {
+      // Handle list items
       inList = true;
       listLines.push(line);
-      return '';
     } else {
+      // Handle paragraphs or plain text
       if (inList) {
-        inList = false;
-        const listHtml = parseUnorderedList(listLines);
+        result += parseUnorderedList(listLines);
         listLines = [];
-        return listHtml + '\n' + parseText(line, false);
+        inList = false;
       }
-      return parseText(line, false);
+      result += parseText(line, false);
     }
   });
 
+  // If the last lines were part of a list, close it
   if (inList) {
-    parsedLines.push(parseUnorderedList(listLines));
+    result += parseUnorderedList(listLines);
   }
 
-  return parsedLines.filter(line => line !== '').join('\n');
+  return result.trim(); // Trim to ensure no trailing newlines
 }
